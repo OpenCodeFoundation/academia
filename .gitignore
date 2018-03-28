@@ -286,3 +286,10 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+
+# Cake build
+tools/
+
+# vs code config file
+.vscode/
