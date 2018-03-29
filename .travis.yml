@@ -13,4 +13,5 @@ os:
 osx_image: xcode8.2
 
 script:
+  - chmod +x build.sh
   - ./build.sh
