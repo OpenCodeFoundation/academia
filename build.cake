@@ -1,3 +1,5 @@
+#addin "Cake.Npm"
+
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,9 +43,20 @@ Task("Restore")
     DotNetCoreRestore();
 });
 
+Task("NpmRestore")
+.Does(() => {
+    var settings = new NpmInstallSettings();
+
+    settings.LogLevel = NpmLogLevel.Info;
+    settings.WorkingDirectory = "src/Academia.Web/";
+
+    NpmInstall(settings);
+});
+
 Task("Build")
 .IsDependentOn("Clean")
 .IsDependentOn("Restore")
+.IsDependentOn("NpmRestore")
 .Does(() => {
     DotNetCoreBuild(solution,
         new DotNetCoreBuildSettings
