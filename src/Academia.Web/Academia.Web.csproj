@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +22,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\addinstitute\addinstitute.component.ts" />
+    <None Remove="ClientApp\app\components\viewinstitute\viewinstitute.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Academia.Core\Academia.Core.csproj" />
     <ProjectReference Include="..\Academia.Infrastructure\Academia.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\addinstitute\addinstitute.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\viewinstitute\viewinstitute.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

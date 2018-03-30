@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Academia.Core.Interfaces;
 using Academia.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,10 +24,10 @@ namespace Academia.Web
 
         // This method gets called when Development Environment is used
         // Use this method to set Development services, like Development database
-        public void ConfigureDevelopmentService(IServiceCollection services)
+        public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             // use in-memeory databses
-            ConfigureTestingService(services);
+            ConfigureTestingServices(services);
 
             // use real database
             // ConfigureProductionService(services);
@@ -34,7 +35,7 @@ namespace Academia.Web
 
         // This method gets called when Testing Environment is used
         // Use this method to set Testing services, like Testing database
-        public void ConfigureTestingService(IServiceCollection services)
+        public void ConfigureTestingServices(IServiceCollection services)
         {
             // Configure in-memory database
             services.AddDbContext<AcademiaContext>(options =>
@@ -45,7 +46,7 @@ namespace Academia.Web
 
         // This method gets called when Production Environment is used
         // Use this method to set Production services, like Production database
-        public void ConfigureProductionService(IServiceCollection services)
+        public void ConfigureProductionServices(IServiceCollection services)
         {
             services.AddDbContext<AcademiaContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
@@ -59,6 +60,9 @@ namespace Academia.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+
             services.AddMvc();
         }
 

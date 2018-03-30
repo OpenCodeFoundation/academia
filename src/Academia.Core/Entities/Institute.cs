@@ -9,18 +9,8 @@ namespace Academia.Core.Entities
     {
         public String Name { get; set; }
 
-        public String Code { get; set; }
-
-        public String Slogan { get; set; }
-
         public String Address { get; set; }
 
         public String Email { get; set; }
-
-        public String Website { get; set; }
-
-        public String Logo { get; set; }
-
-        public DateTime DateOfEstablishment { get; set; }
     }
 }

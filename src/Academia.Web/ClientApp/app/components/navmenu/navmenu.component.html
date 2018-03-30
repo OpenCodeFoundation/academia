@@ -7,24 +7,19 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/home']">Academia.Web</a>
+            <a class='navbar-brand' [routerLink]="['/view-institute']">Academia</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
+                    <a [routerLink]="['/add-institute']">
+                        <span class='glyphicon glyphicon-pencil'></span>Add Institute
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                    <a [routerLink]="['/view-institute']">
+                        <span class='glyphicon glyphicon-book'></span> View Institutes
                     </a>
                 </li>
             </ul>

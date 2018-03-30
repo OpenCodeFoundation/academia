@@ -9,6 +9,8 @@ namespace Academia.Core.Interfaces
     {
         T GetById(Guid id);
 
+        IEnumerable<T> ListAll();
+
         T Add(T entity);
 
         void Update(T entity);
