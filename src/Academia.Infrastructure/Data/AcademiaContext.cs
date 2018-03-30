@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Academia.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AcademiaContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        public AcademiaContext(DbContextOptions<AcademiaContext> options): base(options)
         {
 
         }

@@ -37,7 +37,7 @@ namespace Academia.Web
         public void ConfigureTestingService(IServiceCollection services)
         {
             // Configure in-memory database
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<AcademiaContext>(options =>
                 options.UseInMemoryDatabase("academia"));
 
             ConfigureServices(services);
@@ -47,7 +47,7 @@ namespace Academia.Web
         // Use this method to set Production services, like Production database
         public void ConfigureProductionService(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<AcademiaContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
