@@ -2,8 +2,7 @@
 using Academia.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Xunit;
 
 namespace UnitTests.Entities
@@ -21,10 +20,7 @@ namespace UnitTests.Entities
         [Fact]
         public void ShouldGenerateGuidWhenCreatingEntity()
         {
-            var institute = new Institute
-            {
-                Name = "Best Instutute",
-            };
+            var institute = CreateNewInstitute();
 
             using (var db = new AppDbContext(options))
             {
@@ -33,6 +29,47 @@ namespace UnitTests.Entities
             }
 
             Assert.NotEqual(Guid.Empty, institute.Id);
+        }
+
+        [Fact]
+        public void NumberOfSavedContentShouldBeNullWhenNoItemAdded()
+        {
+            Institute actual = null;
+
+            using (var db = new AppDbContext(options))
+            {
+                actual = db.Institutes.FirstOrDefault();
+            }
+
+            Assert.Null(actual);
+        }
+
+        [Fact]
+        public void ShouldRetriveSavedEntityWithPrimaryKey()
+        {
+            var institute = CreateNewInstitute();
+
+            Institute retrivedInstitute = null;
+
+            using (var db = new AppDbContext(options))
+            {
+                db.Institutes.Add(institute);
+                db.SaveChanges();
+
+                retrivedInstitute = db.Institutes.Find(institute.Id);
+            }
+
+            Assert.Equal(institute, retrivedInstitute);
+        }
+
+        private Institute CreateNewInstitute()
+        {
+            return new Institute
+            {
+                Name = "Best Institute",
+                Website = "http://www.bestinstitute.com",
+                Address = "Bangladesh"
+            };
         }
     }
 }
