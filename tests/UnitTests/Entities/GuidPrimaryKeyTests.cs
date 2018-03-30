@@ -9,20 +9,13 @@ namespace UnitTests.Entities
 {
     public class GuidPrimaryKeyTests
     {
-        private readonly DbContextOptions<AppDbContext> options;
-        public GuidPrimaryKeyTests()
-        {
-            var dbOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            dbOptionsBuilder.UseInMemoryDatabase("test-academia");
-            options = dbOptionsBuilder.Options;
-        }
 
         [Fact]
         public void ShouldGenerateGuidWhenCreatingEntity()
         {
             var institute = CreateNewInstitute();
 
-            using (var db = new AppDbContext(options))
+            using (var db = new AppDbContext(GetDbContextOptions()))
             {
                 db.Institutes.Add(institute);
                 db.SaveChanges();
@@ -31,12 +24,30 @@ namespace UnitTests.Entities
             Assert.NotEqual(Guid.Empty, institute.Id);
         }
 
+        private Institute CreateNewInstitute()
+        {
+            return new Institute
+            {
+                Name = "Best Institute",
+                Website = "http://www.bestinstitute.com",
+                Address = "Bangladesh"
+            };
+        }
+
+        private DbContextOptions<AppDbContext> GetDbContextOptions()
+        {
+            var dbOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            string dbName = Guid.NewGuid().ToString();
+            dbOptionsBuilder.UseInMemoryDatabase(dbName);
+            return dbOptionsBuilder.Options;
+        }
+
         [Fact]
         public void NumberOfSavedContentShouldBeNullWhenNoItemAdded()
         {
             Institute actual = null;
 
-            using (var db = new AppDbContext(options))
+            using (var db = new AppDbContext(GetDbContextOptions()))
             {
                 actual = db.Institutes.FirstOrDefault();
             }
@@ -51,7 +62,7 @@ namespace UnitTests.Entities
 
             Institute retrivedInstitute = null;
 
-            using (var db = new AppDbContext(options))
+            using (var db = new AppDbContext(GetDbContextOptions()))
             {
                 db.Institutes.Add(institute);
                 db.SaveChanges();
@@ -60,16 +71,6 @@ namespace UnitTests.Entities
             }
 
             Assert.Equal(institute, retrivedInstitute);
-        }
-
-        private Institute CreateNewInstitute()
-        {
-            return new Institute
-            {
-                Name = "Best Institute",
-                Website = "http://www.bestinstitute.com",
-                Address = "Bangladesh"
-            };
         }
     }
 }
