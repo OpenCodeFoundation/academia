@@ -21,12 +21,44 @@ namespace Academia.Web
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called when Development Environment is used
+        // Use this method to set Development services, like Development database
+        public void ConfigureDevelopmentService(IServiceCollection services)
+        {
+            // use in-memeory databses
+            ConfigureTestingService(services);
+
+            // use real database
+            // ConfigureProductionService(services);
+        }
+
+        // This method gets called when Testing Environment is used
+        // Use this method to set Testing services, like Testing database
+        public void ConfigureTestingService(IServiceCollection services)
+        {
+            // Configure in-memory database
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseInMemoryDatabase("academia"));
+
+            ConfigureServices(services);
+        }
+
+        // This method gets called when Production Environment is used
+        // Use this method to set Production services, like Production database
+        public void ConfigureProductionService(IServiceCollection services)
+        {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
+
+            ConfigureServices(services);
+        }
+
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options
-                => options.UseInMemoryDatabase("academia"));
-
             services.AddMvc();
         }
 
