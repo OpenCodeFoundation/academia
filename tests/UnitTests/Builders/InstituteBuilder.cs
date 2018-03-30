@@ -9,7 +9,7 @@ namespace UnitTests.Builders
     {
         public string TestName => "Best Institute";
         public string TestAddress => "Bangladesh";
-        public string TestWebsite => "http://www.bestinstitute.com";
+        public string TestEmail => "test@institute.com";
 
         public Institute Build()
         {
@@ -17,7 +17,7 @@ namespace UnitTests.Builders
             {
                 Name = TestName,
                 Address = TestAddress,
-                Website = TestWebsite
+                Email = TestAddress
             };
         }
     }

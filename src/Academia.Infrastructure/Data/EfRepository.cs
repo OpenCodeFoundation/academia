@@ -3,6 +3,7 @@ using Academia.Core.SharedKernel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,6 +54,16 @@ namespace Academia.Infrastructure.Data
         public async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
+        }
+
+        public IEnumerable<T> ListAll()
+        {
+            return _dbContext.Set<T>().AsEnumerable();
+        }
+
+        public async Task<IEnumerable<T>> ListAllAsync()
+        {
+            return await _dbContext.Set<T>().ToListAsync();
         }
 
         public void Update(T entity)
