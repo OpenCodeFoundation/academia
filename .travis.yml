@@ -11,4 +11,4 @@ os:
   - linux
 
 script:
-  - ./build.sh -t UploadCoverage
+  - ./build.sh
