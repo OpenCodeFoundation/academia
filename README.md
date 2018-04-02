@@ -9,6 +9,6 @@ School Management System
 
 ## Building from source
 
-Before building from source you should have [NET Core SDK](https://www.microsoft.com/net/download) and [Node.js](https://nodejs.org/) installed.
+Before building from source make sure you have [NET Core SDK](https://www.microsoft.com/net/download) and [Node.js](https://nodejs.org/) installed on your system.
 
 To run a complete build on command line only, install [Node.js](https://nodejs.org/) and execute `build.cmd` or `build.sh` without arguments.
