@@ -12,3 +12,4 @@ os:
 
 script:
   - ./build.sh
+  - bash <(curl -s https://codecov.io/bash)
