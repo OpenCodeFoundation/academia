@@ -6,3 +6,9 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 School Management System
+
+## Building from source
+
+Before building from source you should have [NET Core SDK](https://www.microsoft.com/net/download) and [Node.js](https://nodejs.org/) installed.
+
+To run a complete build on command line only, install [Node.js](https://nodejs.org/) and execute `build.cmd` or `build.sh` without arguments.
