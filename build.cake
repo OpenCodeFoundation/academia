@@ -8,6 +8,7 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var solution = File("./Academia.sln");
 
+
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
 ///////////////////////////////////////////////////////////////////////////////
@@ -61,7 +62,8 @@ Task("Build")
     DotNetCoreBuild(solution,
         new DotNetCoreBuildSettings
         {
-            NoRestore = true
+            NoRestore = true,
+            ArgumentCustomization = arg => arg.AppendSwitch("/p:DebugType","=","Full")
         }
     );
 });
@@ -75,7 +77,8 @@ Task("Test")
         DotNetCoreTest(file.FullPath,
             new DotNetCoreTestSettings
             {
-                NoBuild = true
+                NoBuild = true,
+                ArgumentCustomization = args=>args.Append("/p:CollectCoverage=true /p:CoverletOutputFormat=opencover")
             }
         );
     }

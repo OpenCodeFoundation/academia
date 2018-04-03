@@ -9,8 +9,7 @@ mono: latest
 dotnet: 2.1.4
 os:
   - linux
-  - osx
-osx_image: xcode8.2
 
 script:
   - ./build.sh
+  - bash <(curl -s https://codecov.io/bash)
