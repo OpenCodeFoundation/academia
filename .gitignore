@@ -292,3 +292,6 @@ tools/
 
 # vs code config file
 .vscode/
+
+# coverage reports
+coverage.xml

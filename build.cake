@@ -1,6 +1,4 @@
 #addin "Cake.Npm"
-#tool nuget:?package=Codecov
-#addin nuget:?package=Cake.Codecov
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -9,7 +7,6 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var solution = File("./Academia.sln");
-var coverageDir = MakeAbsolute(Directory("./coverage"));
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -81,18 +78,10 @@ Task("Test")
             new DotNetCoreTestSettings
             {
                 NoBuild = true,
-                ArgumentCustomization = args=>args.Append("/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=" + coverageDir)
+                ArgumentCustomization = args=>args.Append("/p:CollectCoverage=true /p:CoverletOutputFormat=opencover")
             }
         );
     }
-});
-
-Task("UploadCoverage")
-.IsDependentOn("Test")
-.Does(() =>
-{
-    // Upload a coverage report.
-    Codecov("coverage/coverage.xml");
 });
 
 Task("Default")
