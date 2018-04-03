@@ -89,7 +89,6 @@ Task("OpenCover")
 .IsDependentOn("Build")
 .Does(() => {
     var projectFiles = GetFiles("./tests/**/*.csproj");
-    var coverageNumber = 1;
     foreach(var file in projectFiles)
     {
         OpenCover(tool => {
@@ -99,13 +98,11 @@ Task("OpenCover")
                     NoBuild = true}
             );
         },
-        new FilePath("result"+ coverageNumber +".xml"),
+        new FilePath("./" + file.GetDirectory() + "/coverage.xml"),
         new OpenCoverSettings{
             OldStyle = true,
             Register = "user"
         });
-
-        coverageNumber++;
 
     }
 });
