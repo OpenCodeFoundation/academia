@@ -84,6 +84,32 @@ Task("Test")
     }
 });
 
+#tool "nuget:?package=OpenCover"
+Task("OpenCover")
+.IsDependentOn("Build")
+.Does(() => {
+    var projectFiles = GetFiles("./tests/**/*.csproj");
+    var coverageNumber = 1;
+    foreach(var file in projectFiles)
+    {
+        OpenCover(tool => {
+            tool.DotNetCoreTest(file.FullPath,
+                new DotNetCoreTestSettings
+                {
+                    NoBuild = true}
+            );
+        },
+        new FilePath("result"+ coverageNumber +".xml"),
+        new OpenCoverSettings{
+            OldStyle = true,
+            Register = "user"
+        });
+
+        coverageNumber++;
+
+    }
+});
+
 Task("Default")
 .IsDependentOn("Test");
 
