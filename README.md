@@ -1,6 +1,7 @@
 # Academia
 
 [![Build Status](https://travis-ci.org/techcombd/academia.svg?branch=master)](https://travis-ci.org/techcombd/academia)
+[![Build status](https://ci.appveyor.com/api/projects/status/rq56t7j772m25m1t/branch/master?svg=true)](https://ci.appveyor.com/project/ratanparai/academia/branch/master)
 [![codecov](https://codecov.io/gh/techcombd/academia/branch/master/graph/badge.svg)](https://codecov.io/gh/techcombd/academia)
 [![GitHub license](https://img.shields.io/github/license/techcombd/academia.svg)](https://github.com/techcombd/academia/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/techcombd/academia.svg)](https://github.com/techcombd/academia/issues)
