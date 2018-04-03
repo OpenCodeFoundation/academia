@@ -102,7 +102,8 @@ Task("OpenCover")
         new OpenCoverSettings{
             OldStyle = true,
             Register = "user"
-        });
+        }
+        .WithFilter("+[Academia*]*"));
 
     }
 });
