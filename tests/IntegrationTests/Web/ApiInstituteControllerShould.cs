@@ -1,6 +1,5 @@
 ﻿using Academia.Core.Entities;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +16,10 @@ namespace IntegrationTests.Web
             var response = await _client.GetAsync("/api/Institute");
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
-
-            // We do not seed any institutes so the default list should be empty
-            Assert.Equal("[]", stringResponse);
         }
 
         [Fact]
-        public async Task AddInstitute()
+        public async Task ShouldAddListGetInstitute()
         {
 
             var institute = new Institute
@@ -32,9 +28,19 @@ namespace IntegrationTests.Web
                 Address = "Dhaka"
             };
 
-            var serializedInstitute = JsonConvert.SerializeObject(institute);
+            Institute createdInstitute = await ShouldCreateNewInstitute(institute);
 
-            var content = new StringContent(serializedInstitute, Encoding.UTF8, "application/json");
+            await ShouldReturnOneInstituteOnGetAll();
+
+            await ShouldGetInstituteById(institute, createdInstitute);
+
+        }
+
+        private async Task<Institute> ShouldCreateNewInstitute(Institute institute)
+        {
+            var jsonSerializedInstitute = JsonConvert.SerializeObject(institute);
+
+            var content = new StringContent(jsonSerializedInstitute, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("/api/Institute", content);
             response.EnsureSuccessStatusCode();
 
@@ -42,23 +48,28 @@ namespace IntegrationTests.Web
             var responseInstitute = JsonConvert.DeserializeObject<Institute>(responseString);
 
             Assert.Equal(institute.Name, responseInstitute.Name);
-
-            var getResponse = await _client.GetAsync("/api/Institute");
-            getResponse.EnsureSuccessStatusCode();
-            var responseAllInstitute = await getResponse.Content.ReadAsStringAsync();
-            var responseFromGetInstitute = JsonConvert.DeserializeObject<Institute[]>(responseAllInstitute);
-
-            var length = responseFromGetInstitute.Length;
-            Assert.Equal(1, length);
-
-            var singleResponse = await _client.GetAsync("/api/Institute/" + responseInstitute.Id);
-            singleResponse.EnsureSuccessStatusCode();
-            var responseSingleInstituteString = await singleResponse.Content.ReadAsStringAsync();
-
-            var instituteSingleGet = JsonConvert.DeserializeObject<Institute>(responseSingleInstituteString);
-            Assert.Equal(institute.Name, instituteSingleGet.Name);
-            
+            return responseInstitute;
         }
 
+        private async Task ShouldReturnOneInstituteOnGetAll()
+        {
+            var response = await _client.GetAsync("/api/Institute");
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+            var responseInstituteList = JsonConvert.DeserializeObject<Institute[]>(responseString);
+
+            var length = responseInstituteList.Length;
+            Assert.Equal(1, length);
+        }
+
+        private async Task ShouldGetInstituteById(Institute institute, Institute createdInstitute)
+        {
+            var response = await _client.GetAsync("/api/Institute/" + createdInstitute.Id);
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var responseInstitute = JsonConvert.DeserializeObject<Institute>(responseString);
+            Assert.Equal(institute.Name, responseInstitute.Name);
+        }
     }
 }
