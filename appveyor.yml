@@ -1,10 +1,19 @@
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 environment:
   nodejs_version: "8"
+
+init:
+  - choco install opencover.portable
 
 install:
   - ps: Install-Product node $env:nodejs_version
 
 build_script:
-  - ps: .\build.ps1
+  - ps: .\build.ps1 -Target OpenCover
+
+after_build:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh
