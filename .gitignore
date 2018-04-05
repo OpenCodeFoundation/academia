@@ -295,3 +295,4 @@ tools/
 
 # coverage reports
 coverage.xml
+reports/

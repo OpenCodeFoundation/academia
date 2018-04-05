@@ -108,6 +108,23 @@ Task("OpenCover")
     }
 });
 
+#tool "nuget:?package=ReportGenerator"
+Task("CodeCoverage")
+.Does(() => {
+    if (IsRunningOnUnix())
+    {
+        Information("Linux! Running Coverlet for code coverage");
+        RunTarget("Test");
+    } else {
+        Information("Windows! Running OpenCover");
+        RunTarget("OpenCover");
+    }
+
+    ReportGenerator("./tests/*/coverage.xml", "reports", new ReportGeneratorSettings(){
+        HistoryDirectory = "reports/history"
+    });
+});
+
 Task("Default")
 .IsDependentOn("Test");
 
