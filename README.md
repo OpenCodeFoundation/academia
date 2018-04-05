@@ -14,3 +14,25 @@ School Management System
 Before building from source make sure you have [NET Core SDK](https://www.microsoft.com/net/download) and [Node.js](https://nodejs.org/) installed on your system.
 
 To run a complete build on command line only, install [Node.js](https://nodejs.org/) and execute `build.cmd` or `build.sh` without arguments.
+
+## Code Coverage Report
+
+You can generate `Code Coverage Report` in `HTML` format by running from `Windows Powershell`-
+
+```
+.\build.ps1 -Target CodeCoverage
+```
+
+or from `Windows` `cmd` -
+
+```
+build.cmd -Target CodeCoverage
+```
+
+and from `Linux` or `MacOSX` -
+
+```
+./build.sh -Target CodeCoverage
+```
+
+The `Coverage` report will be generated inside `reports` directory of your project `root`
