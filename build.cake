@@ -113,6 +113,7 @@ Task("CodeCoverage")
 .Does(() => {
     if (IsRunningOnUnix())
     {
+        Information("Linux! Running Coverlet for code coverage");
         RunTarget("Test");
     } else {
         Information("Windows! Running OpenCover");
