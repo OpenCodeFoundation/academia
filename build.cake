@@ -88,6 +88,7 @@ Task("Build")
 
 Task("Test")
 .IsDependentOn("Build")
+.IsDependentOn("NgTestCoverage")
 .Does(() => {
     var projectFiles = GetFiles("./tests/**/*.csproj");
     foreach(var file in projectFiles)
