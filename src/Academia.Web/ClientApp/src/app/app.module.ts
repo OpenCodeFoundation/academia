@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { InstituteService } from './model/institute.service';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,11 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    InstituteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
