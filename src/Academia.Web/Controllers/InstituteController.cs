@@ -17,28 +17,73 @@ namespace Academia.Web.Controllers
 
         public InstituteController(IAsyncRepository<Institute> instituteRepository)
         {
-            this._instituteRepository = instituteRepository;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Institute institute)
-        {
-            var newInstitute = await _instituteRepository.AddAsync(institute);
-            return Ok(newInstitute);
+            _instituteRepository = instituteRepository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IEnumerable<Institute>> GetAll()
         {
-            var listOfInstitutes = await _instituteRepository.ListAllAsync();
-            return Ok(listOfInstitutes);
+            return await _instituteRepository.ListAllAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+
+        [HttpGet("{id}", Name = "GetInstitute")]
+        public async Task<IActionResult> GetById(Guid id)
         {
             var institute = await _instituteRepository.GetByIdAsync(id);
-            return Ok(institute);
+            if (institute == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(institute);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody]Institute institute)
+        {
+            if (institute == null)
+            {
+                return BadRequest();
+            }
+
+            await _instituteRepository.AddAsync(institute);
+
+            return CreatedAtRoute("GetInstitute", new { id = institute.Id }, institute);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody]Institute institute)
+        {
+            if (institute == null || institute.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var ins = await _instituteRepository.GetByIdAsync(id);
+            if(ins == null)
+            {
+                return NotFound();
+            }
+
+            await _instituteRepository.UpdateAsync(institute);
+
+            return new NoContentResult();
+        }
+        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var institute = await _instituteRepository.GetByIdAsync(id);
+
+            if(institute == null)
+            {
+                return NotFound();
+            }
+
+            await _instituteRepository.DeleteAsync(institute);
+
+            return new NoContentResult();
         }
     }
 }

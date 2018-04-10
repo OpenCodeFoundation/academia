@@ -1,0 +1,20 @@
+<h1>Institutes</h1>
+
+<table class="table" *ngIf="institutes">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let institute of institutes | async">
+      <td>{{ institute.id }}</td>
+      <td>{{ institute.name }}</td>
+      <td>{{ institute.address }}</td>
+      <td>{{ institute.email }}</td>
+    </tr>
+  </tbody>
+</table>
