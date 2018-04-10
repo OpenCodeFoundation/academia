@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Institute } from './institute';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class InstituteService {
@@ -19,6 +23,14 @@ export class InstituteService {
       tap(institutes => this.log(`fetched institutes`)),
       catchError(this.handleError(`getInstitutes`))
       ) as Observable<Institute[]>;
+  }
+
+  addInstitute(institute: Institute): Observable<Institute> {
+    return this.http.post<Institute>(this.instituteUrl, institute, httpOptions)
+      .pipe(
+      tap((institute: Institute) => this.log(`added institute w/ id=${institute.id}`)),
+      catchError(this.handleError(`addInstitute`))
+      ) as Observable<Institute>;
   }
 
   /**
