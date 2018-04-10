@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { InstituteService } from './institute.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('InstituteService', () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('InstituteService', () => {
         InstituteService
       ],
       imports: [
-        HttpClientModule
+        HttpClientTestingModule
       ]
     });
   });
