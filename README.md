@@ -1,5 +1,6 @@
 # Academia
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/28c615445e534fbfb9177ca5754cc791)](https://app.codacy.com/app/ratanparai/academia?utm_source=github.com&utm_medium=referral&utm_content=techcombd/academia&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/techcombd/academia.svg?branch=master)](https://travis-ci.org/techcombd/academia)
 [![Build status](https://ci.appveyor.com/api/projects/status/rq56t7j772m25m1t/branch/master?svg=true)](https://ci.appveyor.com/project/ratanparai/academia/branch/master)
 [![codecov](https://codecov.io/gh/techcombd/academia/branch/master/graph/badge.svg)](https://codecov.io/gh/techcombd/academia)
