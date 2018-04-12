@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/techcombd/academia.svg?branch=master)](https://travis-ci.org/techcombd/academia)
 [![Build status](https://ci.appveyor.com/api/projects/status/rq56t7j772m25m1t/branch/master?svg=true)](https://ci.appveyor.com/project/ratanparai/academia/branch/master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/858f2c6c20694f52807e530ac235d9ae)](https://www.codacy.com/app/ratanparai/academia?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=techcombd/academia&amp;utm_campaign=Badge_Grade) 
 [![codecov](https://codecov.io/gh/techcombd/academia/branch/master/graph/badge.svg)](https://codecov.io/gh/techcombd/academia)
 [![GitHub license](https://img.shields.io/github/license/techcombd/academia.svg)](https://github.com/techcombd/academia/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/techcombd/academia.svg)](https://github.com/techcombd/academia/issues)
