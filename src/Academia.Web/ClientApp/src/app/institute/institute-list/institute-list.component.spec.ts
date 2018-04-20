@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InstituteListComponent } from './institute-list.component';
 import { InstituteService } from '../../model/institute.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('InstituteListComponent', () => {
   let component: InstituteListComponent;
@@ -12,7 +13,7 @@ describe('InstituteListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [InstituteListComponent],
       providers: [InstituteService],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     })
     .compileComponents();
   }));
