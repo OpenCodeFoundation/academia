@@ -7,8 +7,8 @@ describe('App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getMainHeading()).toEqual('Hello, world!');
+  it('Institutes list page should have Institutes heading', () => {
+    page.navigateToInstituteListPage();
+    expect(page.getMainHeading()).toEqual('Institutes');
   });
 });
