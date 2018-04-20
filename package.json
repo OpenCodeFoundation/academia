@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/techcombd/academia#readme",
   "devDependencies": {
-    "codelyzer": "^4.3.0"
+    "codelyzer": "^4.3.0",
+    "tslint": "^5.9.1"
   }
 }
