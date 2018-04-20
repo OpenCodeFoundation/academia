@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { InstituteAddComponent } from './institute-add.component';
 import { InstituteService } from '../../model/institute.service';
+import { Institute } from '../../model/institute';
 
 describe('InstituteAddComponent', () => {
   let component: InstituteAddComponent;
@@ -34,4 +35,19 @@ describe('InstituteAddComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create a valid form', () => {
+    expect(component.instituteForm.valid).toBeTruthy();
+  });
+
+  it('should have empty values when initialized', () => {
+    var institute: Institute = {
+      name: '',
+      address: '',
+      email: ''
+    };
+
+    expect(component.instituteForm.value).toEqual(institute);
+  });
+
 });
