@@ -1,0 +1,17 @@
+{
+  "name": "academia",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techcombd/academia.git"
+  },
+  "author": "Ratan Sunder Parai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/techcombd/academia/issues"
+  },
+  "homepage": "https://github.com/techcombd/academia#readme",
+  "devDependencies": {
+    "codelyzer": "^4.3.0"
+  }
+}
