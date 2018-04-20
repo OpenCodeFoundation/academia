@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Academia.Web
 {
@@ -59,6 +63,26 @@ namespace Academia.Web
 
             services.AddMvc();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "Academia - Web API",
+                    Version = "v1",
+                    Contact = new Contact
+                    {
+                        Name = "Ratan Sunder Parai",
+                        Email = "opensource@ratanparai.com",
+                        Url = "https://www.ratanparai.com"
+                    }
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = "Academia.Web.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -87,6 +111,11 @@ namespace Academia.Web
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+
+            app.UseSwagger()
+                .UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Academia API V1");
+                });
 
             app.UseSpa(spa =>
             {
