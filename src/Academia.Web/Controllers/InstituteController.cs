@@ -86,13 +86,17 @@ namespace Academia.Web.Controllers
                 return BadRequest();
             }
 
-            //var ins = await _instituteRepository.GetByIdAsync(id);
-            //if(ins == null)
-            //{
-            //    return NotFound();
-            //}
+            var efInstitute = await _instituteRepository.GetByIdAsync(id);
+            if (efInstitute == null)
+            {
+                return NotFound();
+            }
 
-            await _instituteRepository.UpdateAsync(institute);
+            efInstitute.Name = institute.Name;
+            efInstitute.Address = institute.Address;
+            efInstitute.Email = institute.Email;
+
+            await _instituteRepository.UpdateAsync(efInstitute);
 
             return new NoContentResult();
         }
