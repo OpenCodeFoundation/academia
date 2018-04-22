@@ -1,6 +1,6 @@
 <h1>Add new Institute</h1>
 
-<form [formGroup]="instituteForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="instituteForm" (ngSubmit)="saveInstitute()">
 
   <div class="form-group">
     <label for="name">Name: </label>
@@ -18,4 +18,5 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Add</button>
+  <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
 </form>
