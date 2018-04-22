@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Institute } from '../../model/institute';
 import { InstituteService } from '../../model/institute.service';
@@ -15,17 +16,27 @@ export class InstituteAddComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private instituteService: InstituteService) { }
+    private instituteService: InstituteService,
+    private router: Router) { }
 
   ngOnInit() {
     this.createForm();
   }
 
-  onSubmit() {
+  saveInstitute() {
     const institute: Institute = this.instituteForm.value;
-    this.instituteService.addInstitute(institute).subscribe(status => {
-      console.log("institue is added succesfully {}", status);
-    });
+    this.instituteService.addInstitute(institute)
+      .subscribe(() =>
+        this.goToList()
+      );
+  }
+
+  cancel() {
+    this.goToList();
+  };
+
+  goToList() {
+    this.router.navigate(['/institute']);
   }
 
   createForm() {
