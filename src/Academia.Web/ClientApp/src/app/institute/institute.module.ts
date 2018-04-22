@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InstituteRoutingModule } from './institute-routing.module';
 import { InstituteListComponent } from './institute-list/institute-list.component';
 import { InstituteAddComponent } from './institute-add/institute-add.component';
+import { InstituteEditComponent } from './institute-edit/institute-edit.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { InstituteAddComponent } from './institute-add/institute-add.component';
     InstituteRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [InstituteListComponent, InstituteAddComponent]
+  declarations: [InstituteListComponent, InstituteAddComponent, InstituteEditComponent]
 })
 export class InstituteModule { }

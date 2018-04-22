@@ -86,11 +86,11 @@ namespace Academia.Web.Controllers
                 return BadRequest();
             }
 
-            var ins = await _instituteRepository.GetByIdAsync(id);
-            if(ins == null)
-            {
-                return NotFound();
-            }
+            //var ins = await _instituteRepository.GetByIdAsync(id);
+            //if(ins == null)
+            //{
+            //    return NotFound();
+            //}
 
             await _instituteRepository.UpdateAsync(institute);
 
