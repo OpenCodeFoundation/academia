@@ -18,4 +18,11 @@ export class InstituteListComponent implements OnInit {
     this.institutes = this.instituteService.getInstitutes();
   }
 
+  deleteInstitute(institute: Institute) {
+    this.instituteService.deleteInstitute(institute)
+      .subscribe(() => {
+        this.institutes = this.instituteService.getInstitutes();
+      });
+  }
+
 }

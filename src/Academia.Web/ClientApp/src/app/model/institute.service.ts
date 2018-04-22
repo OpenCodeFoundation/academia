@@ -33,6 +33,15 @@ export class InstituteService {
       ) as Observable<Institute>;
   }
 
+  deleteInstitute(institute: Institute): Observable<Institute> {
+    const url = `${this.instituteUrl}/${institute.id}`;
+
+    return this.http.delete<Institute>(url, httpOptions).pipe(
+      tap(_ => this.log(`delete institute id=${institute.id}`)),
+      catchError(this.handleError<Institute>('deleteInstitute'))
+    );
+  }
+
   /**
    * Returns a function that handles Http operation failures.
    * This error handler lets the app continue to run as if no error occurred.
