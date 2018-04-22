@@ -85,7 +85,7 @@ namespace IntegrationTests.Web
 
             var createInstitute = await ShouldCreateNewInstitute(institute);
 
-            institute.Name = "New Name";
+            createInstitute.Name = "New Name";
             var instituteJsonSerialized = JsonConvert.SerializeObject(createInstitute);
             var content = new StringContent(instituteJsonSerialized, Encoding.UTF8, "application/json");
 
@@ -93,6 +93,14 @@ namespace IntegrationTests.Web
             response.EnsureSuccessStatusCode();
 
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+
+            // now check if the institute is updated
+            var getResponse = await _client.GetAsync("/api/institute/" + createInstitute.Id);
+            getResponse.EnsureSuccessStatusCode();
+            var responseString = await getResponse.Content.ReadAsStringAsync();
+            var instituteGetById = JsonConvert.DeserializeObject<Institute>(responseString);
+
+            Assert.Equal(createInstitute.Name, instituteGetById.Name);
                         
         }
 
@@ -116,7 +124,7 @@ namespace IntegrationTests.Web
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
-        // TODO: make this test pass
+        [Fact]
         public async Task ShouldNotUpdateInstituteIdNotFound()
         {
             var institute = new Institute
@@ -135,7 +143,7 @@ namespace IntegrationTests.Web
 
             var response = await _client.PutAsync("/api/institute/"+ notInDatabaseId, content);
 
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
     }
 }

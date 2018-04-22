@@ -44,16 +44,6 @@ Task("Restore")
     DotNetCoreRestore();
 });
 
-Task("NpmRestore")
-.Does(() => {
-    var settings = new NpmInstallSettings();
-
-    settings.LogLevel = NpmLogLevel.Info;
-    settings.WorkingDirectory = "src/Academia.Web/ClientApp";
-
-    NpmInstall(settings);
-});
-
 Task("NgTestCoverage")
 .Does(() => {
     //Build Angular frontend project using Angular cli
@@ -75,7 +65,6 @@ Task("NgTestCoverage")
 Task("Build")
 .IsDependentOn("Clean")
 .IsDependentOn("Restore")
-.IsDependentOn("NpmRestore")
 .Does(() => {
     DotNetCoreBuild(solution,
         new DotNetCoreBuildSettings
