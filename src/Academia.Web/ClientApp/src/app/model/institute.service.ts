@@ -25,12 +25,42 @@ export class InstituteService {
       ) as Observable<Institute[]>;
   }
 
+  getInstitute(id: string): Observable<Institute> {
+    const url = `${this.instituteUrl}/?id=${id}`;
+    return this.http.get<Institute>(url)
+      .pipe(
+        map(institute => institute[0]),
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} institute id=${id}`);
+        }),
+        catchError(this.handleError<Institute>(`getInstitute id=${id}`))
+      );
+  }
+
   addInstitute(institute: Institute): Observable<Institute> {
     return this.http.post<Institute>(this.instituteUrl, institute, httpOptions)
       .pipe(
       tap((institute: Institute) => this.log(`added institute w/ id=${institute.id}`)),
       catchError(this.handleError(`addInstitute`))
       ) as Observable<Institute>;
+  }
+
+  deleteInstitute(institute: Institute): Observable<Institute> {
+    const url = `${this.instituteUrl}/${institute.id}`;
+
+    return this.http.delete<Institute>(url, httpOptions).pipe(
+      tap(_ => this.log(`delete institute id=${institute.id}`)),
+      catchError(this.handleError<Institute>('deleteInstitute'))
+    );
+  }
+
+  updateInstitute(institute: Institute): Observable<any> {
+    const url = `${this.instituteUrl}/${institute.id}`;
+    return this.http.put(url, institute, httpOptions).pipe(
+      tap(_ => this.log(`update institute id=${institute.id}`)),
+      catchError(this.handleError<any>('updateInstitute'))
+    );
   }
 
   /**

@@ -1,0 +1,23 @@
+<h1>Edit new Institute</h1>
+
+<form [formGroup]="instituteForm" (ngSubmit)="updateInstitute()">
+
+  <div class="form-group">
+    <label for="name">Name: </label>
+    <input class="form-control" formControlName="name" />
+  </div>
+
+  <div class="form-group">
+    <label for="address">Addreess: </label>
+    <input class="form-control" formControlName="address" />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email: </label>
+    <input class="form-control" formControlName="email" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update</button>
+  <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+</form>
+

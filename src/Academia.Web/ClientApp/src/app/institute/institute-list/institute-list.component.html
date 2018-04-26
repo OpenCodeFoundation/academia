@@ -1,20 +1,29 @@
 <h1>Institutes</h1>
 
+<a [routerLink]='["/institute/add"]'>Add Institute</a>
+
 <table class="table" *ngIf="institutes">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Name</th>
       <th>Address</th>
       <th>Email</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let institute of institutes | async">
-      <td>{{ institute.id }}</td>
       <td>{{ institute.name }}</td>
       <td>{{ institute.address }}</td>
       <td>{{ institute.email }}</td>
+      <td>
+        <button type="button" class="btn btn-warning btn-sm" (click)="editInstitute(institute)">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="deleteInstitute(institute)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
