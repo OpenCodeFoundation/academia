@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  academia.web:
+    image: academiaweb
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - sql.data
+
+  sql.data:
+    image: microsoft/mssql-server-linux:2017-latest

@@ -49,7 +49,7 @@ namespace Academia.Web
         public void ConfigureProductionServices(IServiceCollection services)
         {
             services.AddDbContext<AcademiaContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                options.UseSqlServer(Configuration.GetConnectionString("AcademiaConnection"))
             );
 
             ConfigureServices(services);

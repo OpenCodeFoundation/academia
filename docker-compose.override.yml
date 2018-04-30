@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  academia.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings:AcademiaConnection=Server=sql.data;Database=Techcombd.AcademiaDb;User Id=sa;Password=Pass@word
+    ports:
+      - "5500:80"
+
+  sql.data:
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"    # Important: In a production environment your should remove the external port
