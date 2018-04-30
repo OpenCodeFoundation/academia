@@ -3,8 +3,8 @@ version: '3'
 services:
   academia.web:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=Server=sql.data;Database=Techcombd.AcademiaDb;User Id=sa;Password=Pass@word
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings:AcademiaConnection=Server=sql.data;Database=Techcombd.AcademiaDb;User Id=sa;Password=Pass@word
     ports:
       - "5500:80"
 
