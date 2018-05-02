@@ -11,7 +11,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class InstituteService {
+export class ClassinfoService {
 
   readonly classInfoUrl = 'api/classinfos';
 

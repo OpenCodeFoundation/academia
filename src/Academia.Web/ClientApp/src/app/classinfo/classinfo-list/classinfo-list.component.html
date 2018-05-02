@@ -1,0 +1,26 @@
+<h1>ClassInfo</h1>
+
+<a [routerLink]='["/classinfo/add"]'>Add ClassInfo</a>
+
+<table class="table" *ngIf="classinfos">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let classinfo of classinfos | async">
+      <td>{{ classinfo.name }}</td>
+      <td>{{ classinfo.description }}</td>
+      <td>
+        <button type="button" class="btn btn-warning btn-sm" (click)="editInstitute(classinfo)">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="deleteInstitute(classinfo)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

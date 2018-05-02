@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { InstituteService } from './model/institute.service';
+import { ClassinfoService } from "./model/classinfo.service";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InstituteService } from './model/institute.service';
     AppRoutingModule
   ],
   providers: [
-    InstituteService
+    InstituteService,
+    ClassinfoService
   ],
   bootstrap: [AppComponent]
 })
