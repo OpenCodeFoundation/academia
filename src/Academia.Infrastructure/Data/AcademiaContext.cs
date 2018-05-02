@@ -15,6 +15,7 @@ namespace Academia.Infrastructure.Data
         }
 
         public DbSet<Institute> Institutes { get; set; }
+        public DbSet<ClassInfo> ClassInfos { get; set; }
     }
 
     // https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dbcontext-creation

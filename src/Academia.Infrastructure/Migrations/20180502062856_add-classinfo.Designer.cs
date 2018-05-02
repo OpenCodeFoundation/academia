@@ -11,9 +11,10 @@ using System;
 namespace Academia.Infrastructure.Migrations
 {
     [DbContext(typeof(AcademiaContext))]
-    partial class AcademiaContextModelSnapshot : ModelSnapshot
+    [Migration("20180502062856_add-classinfo")]
+    partial class addclassinfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
