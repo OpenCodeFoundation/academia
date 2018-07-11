@@ -3,6 +3,7 @@ using Academia.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Academia.Web.Controllers
@@ -35,6 +36,21 @@ namespace Academia.Web.Controllers
             }
 
             return new ObjectResult(classInfo);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ClassInfo), (int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Create([FromBody]ClassInfo classInfo)
+        {
+            if (classInfo == null)
+            {
+                return BadRequest();
+            }
+
+            await _classInfoRepository.AddAsync(classInfo);
+
+            return CreatedAtRoute("GetClassInfo", new { id = classInfo.Id }, classInfo);
         }
     }
 }
