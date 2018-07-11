@@ -1,6 +1,7 @@
 ﻿using Academia.Core.Entities;
 using Academia.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,6 +22,19 @@ namespace Academia.Web.Controllers
         public async Task<IEnumerable<ClassInfo>> GetAll()
         {
             return await _classInfoRepository.ListAllAsync();
+        }
+
+        [HttpGet("{id}", Name = "GetClassInfo")]
+        public async Task<IActionResult> GetById (Guid id)
+        {
+            var classInfo = _classInfoRepository.GetByIdAsync(id);
+
+            if (classInfo == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(classInfo);
         }
     }
 }
