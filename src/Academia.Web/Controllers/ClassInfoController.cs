@@ -27,7 +27,7 @@ namespace Academia.Web.Controllers
         [HttpGet("{id}", Name = "GetClassInfo")]
         public async Task<IActionResult> GetById (Guid id)
         {
-            var classInfo = _classInfoRepository.GetByIdAsync(id);
+            var classInfo = await _classInfoRepository.GetByIdAsync(id);
 
             if (classInfo == null)
             {
