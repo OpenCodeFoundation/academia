@@ -41,8 +41,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\model\ClassInfo.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Academia.Core\Academia.Core.csproj" />
     <ProjectReference Include="..\Academia.Infrastructure\Academia.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\model\classInfo.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
