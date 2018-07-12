@@ -78,5 +78,22 @@ namespace Academia.Web.Controllers
 
             return new NoContentResult();
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var classInfo = await _classInfoRepository.GetByIdAsync(id);
+
+            if (classInfo == null)
+            {
+                return NotFound();
+            }
+
+            await _classInfoRepository.DeleteAsync(classInfo);
+
+            return new NoContentResult();
+        }
     }
 }
