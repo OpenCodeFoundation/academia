@@ -26,7 +26,7 @@ namespace Academia.Web.Controllers
         }
 
         [HttpGet("{id}", Name = "GetClassInfo")]
-        public async Task<IActionResult> GetById (Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var classInfo = await _classInfoRepository.GetByIdAsync(id);
 
@@ -51,6 +51,32 @@ namespace Academia.Web.Controllers
             await _classInfoRepository.AddAsync(classInfo);
 
             return CreatedAtRoute("GetClassInfo", new { id = classInfo.Id }, classInfo);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> Update(Guid id, ClassInfo classInfo)
+        {
+            if (classInfo == null || classInfo.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var efClassInfo = await _classInfoRepository.GetByIdAsync(id);
+            if (efClassInfo == null)
+            {
+                return NotFound();
+            }
+
+            efClassInfo.Name = classInfo.Name;
+            efClassInfo.Code = classInfo.Code;
+            efClassInfo.Description = classInfo.Description;
+
+            await _classInfoRepository.UpdateAsync(efClassInfo);
+
+            return new NoContentResult();
         }
     }
 }
