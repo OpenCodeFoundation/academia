@@ -1,9 +1,6 @@
 ﻿using Academia.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Academia.Infrastructure.Data
 {
@@ -15,6 +12,7 @@ namespace Academia.Infrastructure.Data
         }
 
         public DbSet<Institute> Institutes { get; set; }
+        public DbSet<ClassInfo> ClassInfos { get; set; }
     }
 
     // https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dbcontext-creation
